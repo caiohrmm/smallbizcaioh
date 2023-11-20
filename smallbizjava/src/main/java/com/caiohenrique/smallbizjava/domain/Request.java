@@ -23,7 +23,7 @@ public class Request implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	
 	@Column(name = "opening_date")
 	@JsonFormat(pattern = "dd/MM/yyyy")
@@ -53,10 +53,9 @@ public class Request implements Serializable {
 	@JoinColumn(name = "technician_id")
 	private Technician technician;
 	
-	public Request(Integer id, Priority priority, Status status, String title, String description, Client client,
+	public Request(Priority priority, Status status, String title, String description, Client client,
 			Technician technician) {
 		super();
-		this.id = id;
 		this.priority = priority;
 		this.status = status;
 		this.title = title;
@@ -69,11 +68,11 @@ public class Request implements Serializable {
 		super();
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -161,6 +160,8 @@ public class Request implements Serializable {
 				&& status == other.status && Objects.equals(technician, other.technician)
 				&& Objects.equals(title, other.title);
 	}
+
+	
 	
 	
 	

@@ -8,7 +8,7 @@ import javax.persistence.OneToMany;
 
 import com.caiohenrique.smallbizjava.domain.enums.Profile;
 
-@Entity(name = "TB_TECHNICIAN")
+@Entity
 public class Technician extends Person {
 
 	private static final long serialVersionUID = 1L;
@@ -21,8 +21,9 @@ public class Technician extends Person {
 		addProfile(Profile.TECHNICIAN);
 	}
 
-	public Technician(Long id, String name, String cpf, String email, String password) {
-		super(id, name, cpf, email, password);
+	public Technician(String name, String cpf, String email, String password) {
+		super(name, cpf, email, password);
+		addProfile(Profile.TECHNICIAN);
 	}
 
 	public List<Request> getRequests() {

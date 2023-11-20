@@ -57,9 +57,8 @@ public abstract class Person implements Serializable{
 		addProfile(Profile.CLIENT);
 	}
 
-	public Person(Long id, String name, String nin, String email, String password) {
+	public Person(String name, String nin, String email, String password) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.nin = nin;
 		this.email = email;
