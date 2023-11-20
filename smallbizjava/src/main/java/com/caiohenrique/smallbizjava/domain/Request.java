@@ -1,22 +1,56 @@
 package com.caiohenrique.smallbizjava.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import com.caiohenrique.smallbizjava.domain.enums.Priority;
 import com.caiohenrique.smallbizjava.domain.enums.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class Request {
+@Entity(name = "TB_REQUEST")
+public class Request implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@Column(name = "opening_date")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate openingDate = LocalDate.now();
+	
+	@Column(name = "closing_date")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate closingDate;
+	
+	@Column
 	private Priority priority;
+	
+	@Column
 	private Status status;
+	
+	@Column
 	private String title;
+	
+	@Column
 	private String description;
 	
+	@ManyToOne
+	@JoinColumn(name = "client_id")
 	private Client client;
+	
+	@ManyToOne
+	@JoinColumn(name = "technician_id")
 	private Technician technician;
 	
 	public Request(Integer id, Priority priority, Status status, String title, String description, Client client,

@@ -11,14 +11,6 @@ public class SmallbizjavaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SmallbizjavaApplication.class, args);
-		
-		Profile profile = Profile.toEnum(2);
-		System.out.println(profile.getDescription());
-		
-		Priority priority = Priority.toEnum(2);
-		System.out.println(priority.getDescription());
-		
-		
 	}
 
 }

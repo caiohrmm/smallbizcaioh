@@ -1,24 +1,55 @@
 package com.caiohenrique.smallbizjava.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.annotation.Generated;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import com.caiohenrique.smallbizjava.domain.enums.Profile;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /* this abstract class uses protected attributes for inheritance purposes. */
 
-public abstract class Person {
+@Entity(name = "TB_PERSON")
+public abstract class Person implements Serializable{
 
-	
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
+	
+	@Column
 	protected String name;
-	protected String cpf;
+	
+	@Column(unique = true)
+	protected String nin;
+	
+	@Column(unique = true)
 	protected String email;
+	
+	@Column
 	protected String password;
+	
+	/* Whenever I search for a user it will bring all their associated profiles */
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "profiles")
 	protected Set<Integer> profiles = new HashSet<>();
+	
+	@Column(name = "created_date")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected LocalDate createdDate = LocalDate.now();
 	
 	public Person() {
@@ -26,11 +57,11 @@ public abstract class Person {
 		addProfile(Profile.CLIENT);
 	}
 
-	public Person(Long id, String name, String cpf, String email, String password) {
+	public Person(Long id, String name, String nin, String email, String password) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.cpf = cpf;
+		this.nin = nin;
 		this.email = email;
 		this.password = password;
 		addProfile(Profile.CLIENT);
@@ -52,12 +83,12 @@ public abstract class Person {
 		this.name = name;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getNin() {
+		return nin;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setNin(String nin) {
+		this.nin = nin;
 	}
 
 	public String getEmail() {
@@ -94,7 +125,7 @@ public abstract class Person {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cpf, createdDate, email, id, name, password, profiles);
+		return Objects.hash(createdDate, email, id, name, nin, password, profiles);
 	}
 
 	@Override
@@ -106,11 +137,12 @@ public abstract class Person {
 		if (getClass() != obj.getClass())
 			return false;
 		Person other = (Person) obj;
-		return Objects.equals(cpf, other.cpf) && Objects.equals(createdDate, other.createdDate)
-				&& Objects.equals(email, other.email) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name) && Objects.equals(password, other.password)
-				&& Objects.equals(profiles, other.profiles);
+		return Objects.equals(createdDate, other.createdDate) && Objects.equals(email, other.email)
+				&& Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(nin, other.nin)
+				&& Objects.equals(password, other.password) && Objects.equals(profiles, other.profiles);
 	}
+
+	
 	
 	
 	
