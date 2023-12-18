@@ -35,8 +35,5 @@ public class Client extends Person {
 	public void setRequests(List<Request> requests) {
 		this.requests = requests;
 	}
-	
-	
-	
 
 }

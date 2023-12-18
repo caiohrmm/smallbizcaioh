@@ -1,5 +1,9 @@
 package com.caiohenrique.smallbizjava.domain;
 
+import com.caiohenrique.smallbizjava.domain.enums.Profile;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -7,22 +11,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.annotation.Generated;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import com.caiohenrique.smallbizjava.domain.enums.Profile;
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 /* this abstract class uses protected attributes for inheritance purposes. */
 
-@Entity(name = "TB_PERSON")
+@Entity
 public abstract class Person implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -140,16 +131,4 @@ public abstract class Person implements Serializable{
 				&& Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(nin, other.nin)
 				&& Objects.equals(password, other.password) && Objects.equals(profiles, other.profiles);
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

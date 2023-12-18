@@ -16,7 +16,7 @@ import com.caiohenrique.smallbizjava.domain.enums.Priority;
 import com.caiohenrique.smallbizjava.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity(name = "TB_REQUEST")
+@Entity
 public class Request implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
