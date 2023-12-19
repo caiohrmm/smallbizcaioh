@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import com.caiohenrique.smallbizjava.domain.enums.Priority;
 import com.caiohenrique.smallbizjava.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Request implements Serializable {
@@ -48,7 +49,8 @@ public class Request implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Client client;
-	
+
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "technician_id")
 	private Technician technician;
