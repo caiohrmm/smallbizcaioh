@@ -4,6 +4,7 @@ import com.caiohenrique.smallbizjava.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @Entity
 public abstract class Person implements Serializable{
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	@Id
