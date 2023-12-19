@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping(value = "/technician")
 public class TechnicianController {
@@ -24,6 +27,15 @@ public class TechnicianController {
         Technician technician = this.technicianService.findById(id);
 
         return ResponseEntity.ok().body(new TechnicianDTO(technician));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TechnicianDTO>> findAll() {
+
+        List<Technician> technicians = this.technicianService.findAll();
+        List<TechnicianDTO> technicianDTOS = technicians.stream().map(TechnicianDTO::new).toList();
+
+        return ResponseEntity.ok().body(technicianDTOS);
     }
 
 

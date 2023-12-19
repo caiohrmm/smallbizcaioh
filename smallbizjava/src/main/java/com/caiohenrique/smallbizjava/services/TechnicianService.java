@@ -6,6 +6,7 @@ import com.caiohenrique.smallbizjava.repositories.TechnicianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,4 +23,7 @@ public class TechnicianService {
         ));
     }
 
+    public List<Technician> findAll() {
+        return technicianRepository.findAll();
+    }
 }
