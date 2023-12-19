@@ -98,7 +98,7 @@ public abstract class Person implements Serializable{
 	}
 
 	public Set<Profile> getProfiles() {
-		return profiles.stream().map(profile -> Profile.toEnum(profile)).collect(Collectors.toSet());
+		return profiles.stream().map(Profile::toEnum).collect(Collectors.toSet());
 	}
 
 	public void addProfile(Profile profile) {

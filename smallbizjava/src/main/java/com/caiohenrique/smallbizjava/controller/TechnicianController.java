@@ -1,6 +1,7 @@
 package com.caiohenrique.smallbizjava.controller;
 
 import com.caiohenrique.smallbizjava.domain.Technician;
+import com.caiohenrique.smallbizjava.domain.dtos.TechnicianDTO;
 import com.caiohenrique.smallbizjava.services.TechnicianService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +19,11 @@ public class TechnicianController {
 
     // Método para buscar um técnico por ID
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Technician> findById(@PathVariable Long id) {
+    public ResponseEntity<TechnicianDTO> findById(@PathVariable Long id) {
 
         Technician technician = this.technicianService.findById(id);
 
-        return ResponseEntity.ok().body(technician);
+        return ResponseEntity.ok().body(new TechnicianDTO(technician));
     }
 
 
