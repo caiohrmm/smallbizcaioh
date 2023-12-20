@@ -2,10 +2,12 @@ package com.caiohenrique.smallbizjava.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.caiohenrique.smallbizjava.domain.dtos.TechnicianDTO;
 import com.caiohenrique.smallbizjava.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -35,8 +37,19 @@ public class Technician extends Person {
 	public void setRequests(List<Request> requests) {
 		this.requests = requests;
 	}
-	
-	
+
+	public Technician(TechnicianDTO technicianDTO) {
+		this.id = technicianDTO.getId();
+		this.name = technicianDTO.getName();
+		this.nin = technicianDTO.getNin();
+		this.email = technicianDTO.getEmail();
+		this.password = technicianDTO.getPassword();
+		this.profiles = technicianDTO.getProfiles().stream().map(
+				Profile::getId
+		).collect(Collectors.toSet());
+		this.createdDate = technicianDTO.getCreatedDate();
+		addProfile(Profile.CLIENT);
+	}
 	
 	
 	

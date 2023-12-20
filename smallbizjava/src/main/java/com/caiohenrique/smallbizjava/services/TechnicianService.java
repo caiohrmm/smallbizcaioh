@@ -1,6 +1,7 @@
 package com.caiohenrique.smallbizjava.services;
 
 import com.caiohenrique.smallbizjava.domain.Technician;
+import com.caiohenrique.smallbizjava.domain.dtos.TechnicianDTO;
 import com.caiohenrique.smallbizjava.exceptions.ObjectNotFoundException;
 import com.caiohenrique.smallbizjava.repositories.TechnicianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,13 @@ public class TechnicianService {
 
     public List<Technician> findAll() {
         return technicianRepository.findAll();
+    }
+
+    public Technician create(TechnicianDTO technicianDTO) {
+
+        technicianDTO.setId(null);
+        Technician technician = new Technician(technicianDTO);
+        return technicianRepository.save(technician);
+
     }
 }

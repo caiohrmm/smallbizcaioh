@@ -98,6 +98,8 @@ public class TechnicianDTO implements Serializable {
 
     public TechnicianDTO() {
         super();
+        addProfile(Profile.CLIENT);
+
     }
 
     public TechnicianDTO(Technician technician) {
@@ -110,6 +112,7 @@ public class TechnicianDTO implements Serializable {
                 Profile::getId
         ).collect(Collectors.toSet());
         this.createdDate = technician.getCreatedDate();
+        addProfile(Profile.CLIENT);
     }
 }
 
