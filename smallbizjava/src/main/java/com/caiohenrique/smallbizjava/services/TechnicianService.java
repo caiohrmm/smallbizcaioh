@@ -1,13 +1,17 @@
 package com.caiohenrique.smallbizjava.services;
 
+import com.caiohenrique.smallbizjava.domain.Person;
 import com.caiohenrique.smallbizjava.domain.Technician;
 import com.caiohenrique.smallbizjava.domain.dtos.TechnicianDTO;
 import com.caiohenrique.smallbizjava.exceptions.ObjectNotFoundException;
+import com.caiohenrique.smallbizjava.exceptions.handler.BadRequestException;
+import com.caiohenrique.smallbizjava.repositories.PersonRepository;
 import com.caiohenrique.smallbizjava.repositories.TechnicianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -15,6 +19,9 @@ public class TechnicianService {
 
     @Autowired
     private TechnicianRepository technicianRepository;
+
+    @Autowired
+    private PersonRepository personRepository;
 
     public Technician findById(Long id) {
 
@@ -31,8 +38,28 @@ public class TechnicianService {
     public Technician create(TechnicianDTO technicianDTO) {
 
         technicianDTO.setId(null);
+
+        // Valida campos
+        verifyIntegratedFields(technicianDTO);
+
         Technician technician = new Technician(technicianDTO);
         return technicianRepository.save(technician);
+
+    }
+
+    private void verifyIntegratedFields(TechnicianDTO technicianDTO) {
+
+        Optional<Person> personTech = this.personRepository.findByNin(technicianDTO.getNin());
+
+        if (personTech.isPresent() && !Objects.equals(personTech.get().getId(), technicianDTO.getId())) {
+            throw new BadRequestException("Já existe um técnico cadastrado com esse CPF.");
+        }
+
+        personTech = this.personRepository.findByEmail(technicianDTO.getEmail());
+
+        if (personTech.isPresent() && !Objects.equals(personTech.get().getId(), technicianDTO.getId())) {
+            throw new BadRequestException("Já existe um técnico cadastrado com esse E-mail.");
+        }
 
     }
 }
