@@ -46,12 +46,10 @@ public abstract class Person implements Serializable{
 	protected LocalDate createdDate = LocalDate.now();
 	
 	public Person() {
-		super();
 		addProfile(Profile.CLIENT);
 	}
 
 	public Person(String name, String nin, String email, String password) {
-		super();
 		this.name = name;
 		this.nin = nin;
 		this.email = email;

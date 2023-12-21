@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class DbService {
@@ -30,6 +31,8 @@ public class DbService {
 
         Technician testTechnician = new Technician("Caio Henrique", "99999999999", "caiohenrique@caiohenrique.com.br",
                 "123");
+        Technician testTechnician2 = new Technician("Luis Felipe", "100000000000", "luisfelipe@caiohenrique.com.br",
+                "123");
         testTechnician.addProfile(Profile.ADMIN);
 
         Client testClient = new Client("Paulo Roberto", "99999999991", "pauloroberto@pauloroberto.com.br", "123");
@@ -39,13 +42,13 @@ public class DbService {
                 testClient,
                 testTechnician);
 
-        technicianRepository.saveAll(Arrays.asList(
-                testTechnician));
+        technicianRepository.saveAll(List.of(
+                testTechnician, testTechnician2));
 
-        clientRepository.saveAll(Arrays.asList(
+        clientRepository.saveAll(List.of(
                 testClient));
 
-        requestRepository.saveAll(Arrays.asList(
+        requestRepository.saveAll(List.of(
                 testRequest));
     }
 
