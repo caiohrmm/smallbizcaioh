@@ -4,6 +4,7 @@ import com.caiohenrique.smallbizjava.domain.Technician;
 import com.caiohenrique.smallbizjava.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -19,9 +20,13 @@ public class TechnicianDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     protected Long id;
+    @NotNull(message = "O campo nome é obrigatório!")
     protected String name;
+    @NotNull(message = "O campo CPF é obrigatório!")
     protected String nin;
+    @NotNull(message = "O campo email é obrigatório!")
     protected String email;
+    @NotNull(message = "O campo senha é obrigatório!")
     protected String password;
     protected Set<Integer> profiles = new HashSet<>();
     @JsonFormat(pattern = "dd/MM/yyyy")

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,7 +39,7 @@ public class TechnicianController {
     }
 
     @PostMapping
-    public ResponseEntity<TechnicianDTO> create(@RequestBody TechnicianDTO technicianDTO) {
+    public ResponseEntity<TechnicianDTO> create(@Valid @RequestBody TechnicianDTO technicianDTO) {
         Technician technician = this.technicianService.create(technicianDTO);
         // Ao criar um novo técnico, a API retorna a sua URI de acesso no header.
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(
