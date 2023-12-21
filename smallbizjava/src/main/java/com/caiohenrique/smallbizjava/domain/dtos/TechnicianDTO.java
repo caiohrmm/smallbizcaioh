@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -31,8 +32,9 @@ public class TechnicianDTO implements Serializable {
     @NotNull(message = "O campo senha é obrigatório!")
     protected String password;
     protected Set<Integer> profiles = new HashSet<>();
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    protected LocalDate createdDate = LocalDate.now();
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    protected LocalDateTime createdDate = LocalDateTime.now();
+
 
     public Long getId() {
         return id;
@@ -82,11 +84,15 @@ public class TechnicianDTO implements Serializable {
         this.profiles.add(profile.getId());
     }
 
-    public LocalDate getCreatedDate() {
+    public void setProfiles(Set<Integer> profiles) {
+        this.profiles = profiles;
+    }
+
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 

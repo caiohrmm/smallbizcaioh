@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -43,7 +44,7 @@ public abstract class Person implements Serializable {
 
     @Column(name = "created_date")
     @JsonFormat(pattern = "dd/MM/yyyy")
-    protected LocalDate createdDate = LocalDate.now();
+    protected LocalDateTime createdDate = LocalDateTime.now();
 
     public Person() {
         addProfile(Profile.CLIENT);
@@ -105,11 +106,11 @@ public abstract class Person implements Serializable {
         this.profiles.add(profile.getId());
     }
 
-    public LocalDate getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
