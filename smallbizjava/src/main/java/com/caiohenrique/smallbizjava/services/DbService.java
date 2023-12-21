@@ -12,7 +12,6 @@ import com.caiohenrique.smallbizjava.repositories.TechnicianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -36,6 +35,7 @@ public class DbService {
         testTechnician.addProfile(Profile.ADMIN);
 
         Client testClient = new Client("Paulo Roberto", "99999999991", "pauloroberto@pauloroberto.com.br", "123");
+        Client testClient2 = new Client("Rodrigo Souza", "9999999992", "rodrigosouza@pauloroberto.com.br", "123");
 
         Request testRequest = new Request(Priority.MEDIUM, Status.IN_PROGRESS, "Primeiro Pedido",
                 "Teste primeiro pedido",
@@ -46,7 +46,7 @@ public class DbService {
                 testTechnician, testTechnician2));
 
         clientRepository.saveAll(List.of(
-                testClient));
+                testClient, testClient2));
 
         requestRepository.saveAll(List.of(
                 testRequest));

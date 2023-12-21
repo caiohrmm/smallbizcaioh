@@ -49,7 +49,7 @@ public class TechnicianController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<TechnicianDTO> update(@PathVariable Long id,@Valid @RequestBody TechnicianDTO technicianDTO) {
+    public ResponseEntity<TechnicianDTO> update(@PathVariable Long id, @Valid @RequestBody TechnicianDTO technicianDTO) {
         Technician newTechnician = this.technicianService.update(id, technicianDTO);
         return ResponseEntity.ok().body(new TechnicianDTO(newTechnician));
     }

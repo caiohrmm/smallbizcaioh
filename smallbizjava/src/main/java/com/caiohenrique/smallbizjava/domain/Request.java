@@ -19,156 +19,149 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Request implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column(name = "opening_date")
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate openingDate = LocalDate.now();
-	
-	@Column(name = "closing_date")
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate closingDate;
-	
-	@Column
-	private Priority priority;
-	
-	@Column
-	private Status status;
-	
-	@Column
-	private String title;
-	
-	@Column
-	private String description;
-	
-	@ManyToOne
-	@JoinColumn(name = "client_id")
-	private Client client;
 
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "technician_id")
-	private Technician technician;
-	
-	public Request(Priority priority, Status status, String title, String description, Client client,
-			Technician technician) {
-		super();
-		this.priority = priority;
-		this.status = status;
-		this.title = title;
-		this.description = description;
-		this.client = client;
-		this.technician = technician;
-	}
+    private static final long serialVersionUID = 1L;
 
-	public Request() {
-		super();
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    @Column(name = "opening_date")
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate openingDate = LocalDate.now();
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Column(name = "closing_date")
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate closingDate;
 
-	public LocalDate getOpeningDate() {
-		return openingDate;
-	}
+    @Column
+    private Priority priority;
 
-	public void setOpeningDate(LocalDate openingDate) {
-		this.openingDate = openingDate;
-	}
+    @Column
+    private Status status;
 
-	public LocalDate getClosingDate() {
-		return closingDate;
-	}
+    @Column
+    private String title;
 
-	public void setClosingDate(LocalDate closingDate) {
-		this.closingDate = closingDate;
-	}
+    @Column
+    private String description;
 
-	public Priority getPriority() {
-		return priority;
-	}
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
 
-	public void setPriority(Priority priority) {
-		this.priority = priority;
-	}
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "technician_id")
+    private Technician technician;
 
-	public Status getStatus() {
-		return status;
-	}
+    public Request(Priority priority, Status status, String title, String description, Client client,
+                   Technician technician) {
+        super();
+        this.priority = priority;
+        this.status = status;
+        this.title = title;
+        this.description = description;
+        this.client = client;
+        this.technician = technician;
+    }
 
-	public void setStatus(Status status) {
-		this.status = status;
-	}
+    public Request() {
+        super();
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public LocalDate getOpeningDate() {
+        return openingDate;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setOpeningDate(LocalDate openingDate) {
+        this.openingDate = openingDate;
+    }
 
-	public Client getClient() {
-		return client;
-	}
+    public LocalDate getClosingDate() {
+        return closingDate;
+    }
 
-	public void setClient(Client client) {
-		this.client = client;
-	}
+    public void setClosingDate(LocalDate closingDate) {
+        this.closingDate = closingDate;
+    }
 
-	public Technician getTechnician() {
-		return technician;
-	}
+    public Priority getPriority() {
+        return priority;
+    }
 
-	public void setTechnician(Technician technician) {
-		this.technician = technician;
-	}
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(client, closingDate, description, id, openingDate, priority, status, technician, title);
-	}
+    public Status getStatus() {
+        return status;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Request other = (Request) obj;
-		return Objects.equals(client, other.client) && Objects.equals(closingDate, other.closingDate)
-				&& Objects.equals(description, other.description) && Objects.equals(id, other.id)
-				&& Objects.equals(openingDate, other.openingDate) && priority == other.priority
-				&& status == other.status && Objects.equals(technician, other.technician)
-				&& Objects.equals(title, other.title);
-	}
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
-	
-	
-	
-	
-	
-	
-	
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Technician getTechnician() {
+        return technician;
+    }
+
+    public void setTechnician(Technician technician) {
+        this.technician = technician;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(client, closingDate, description, id, openingDate, priority, status, technician, title);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Request other = (Request) obj;
+        return Objects.equals(client, other.client) && Objects.equals(closingDate, other.closingDate)
+                && Objects.equals(description, other.description) && Objects.equals(id, other.id)
+                && Objects.equals(openingDate, other.openingDate) && priority == other.priority
+                && status == other.status && Objects.equals(technician, other.technician)
+                && Objects.equals(title, other.title);
+    }
+
 
 }
