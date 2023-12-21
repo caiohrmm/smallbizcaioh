@@ -62,4 +62,12 @@ public class TechnicianService {
         }
 
     }
+
+    public Technician update(Long id, TechnicianDTO technicianDTO) {
+        technicianDTO.setId(id);
+        Technician oldTechnicianDTO = findById(id);
+        verifyIntegratedFields(technicianDTO);
+        oldTechnicianDTO = new Technician(technicianDTO);
+        return technicianRepository.save(oldTechnicianDTO);
+    }
 }

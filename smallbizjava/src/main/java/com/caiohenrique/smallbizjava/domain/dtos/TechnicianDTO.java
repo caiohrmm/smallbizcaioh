@@ -3,6 +3,7 @@ package com.caiohenrique.smallbizjava.domain.dtos;
 import com.caiohenrique.smallbizjava.domain.Technician;
 import com.caiohenrique.smallbizjava.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serial;
@@ -23,6 +24,7 @@ public class TechnicianDTO implements Serializable {
     @NotNull(message = "O campo nome é obrigatório!")
     protected String name;
     @NotNull(message = "O campo CPF é obrigatório!")
+    @CPF
     protected String nin;
     @NotNull(message = "O campo email é obrigatório!")
     protected String email;
