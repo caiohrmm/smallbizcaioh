@@ -1,9 +1,11 @@
-package com.caiohenrique.smallbizjava.domain;
+package com.caiohenrique.smallbizjava.domain.dtos;
 
+import com.caiohenrique.smallbizjava.domain.Client;
 import com.caiohenrique.smallbizjava.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.br.CPF;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -13,49 +15,35 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/* this abstract class uses protected attributes for inheritance purposes. */
-
-@Entity
-public abstract class Person implements Serializable {
+public class ClientDTO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
-
-    @Column
+    @NotNull(message = "O campo nome é obrigatório!")
     protected String name;
-
-    @Column(unique = true)
+    @NotNull(message = "O campo CPF é obrigatório!")
+    @CPF
     protected String nin;
-
-    @Column(unique = true)
+    @NotNull(message = "O campo email é obrigatório!")
     protected String email;
-
-    @Column
+    @NotNull(message = "O campo senha é obrigatório!")
     protected String password;
-
-    /* Whenever I search for a user it will bring all their associated profiles */
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "profiles")
     protected Set<Integer> profiles = new HashSet<>();
-
-    @Column(name = "created_date")
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     protected LocalDateTime createdDate = LocalDateTime.now();
 
-    public Person() {
-        addProfile(Profile.CLIENT);
-    }
-
-    public Person(String name, String nin, String email, String password) {
-        this.name = name;
-        this.nin = nin;
-        this.email = email;
-        this.password = password;
-        addProfile(Profile.CLIENT);
+    public ClientDTO(Client client) {
+        this.id = client.getId();
+        this.name = client.getName();
+        this.nin = client.getNin();
+        this.email = client.getEmail();
+        this.password = client.getPassword();
+        this.profiles = client.getProfiles().stream().map(
+                Profile::getId
+        ).collect(Collectors.toSet());
+        this.createdDate = client.getCreatedDate();
     }
 
     public Long getId() {
@@ -115,21 +103,15 @@ public abstract class Person implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(createdDate, email, id, name, nin, password, profiles);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ClientDTO clientDTO = (ClientDTO) o;
+        return Objects.equals(id, clientDTO.id) && Objects.equals(name, clientDTO.name) && Objects.equals(nin, clientDTO.nin) && Objects.equals(email, clientDTO.email) && Objects.equals(password, clientDTO.password) && Objects.equals(profiles, clientDTO.profiles) && Objects.equals(createdDate, clientDTO.createdDate);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Person other = (Person) obj;
-        return Objects.equals(createdDate, other.createdDate) && Objects.equals(email, other.email)
-                && Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(nin, other.nin)
-                && Objects.equals(password, other.password) && Objects.equals(profiles, other.profiles);
+    public int hashCode() {
+        return Objects.hash(id, name, nin, email, password, profiles, createdDate);
     }
 }

@@ -40,14 +40,14 @@ public class TechnicianService {
         technicianDTO.setId(null);
 
         // Valida campos
-        verifyIntegratedFields(technicianDTO);
+        validateEssentialFields(technicianDTO);
 
         Technician technician = new Technician(technicianDTO);
         return technicianRepository.save(technician);
 
     }
 
-    private void verifyIntegratedFields(TechnicianDTO technicianDTO) {
+    private void validateEssentialFields (TechnicianDTO technicianDTO) {
 
         Optional<Person> personTech = this.personRepository.findByNin(technicianDTO.getNin());
 
@@ -60,6 +60,24 @@ public class TechnicianService {
         if (personTech.isPresent() && !Objects.equals(personTech.get().getId(), technicianDTO.getId())) {
             throw new BadRequestException("Já existe um técnico cadastrado com esse E-mail.");
         }
+
+    }
+
+    public Technician update(Long id, TechnicianDTO technicianDTO) {
+        technicianDTO.setId(id);
+        Technician oldTechnicianDTO = findById(id);
+        validateEssentialFields(technicianDTO);
+        oldTechnicianDTO = new Technician(technicianDTO);
+        return technicianRepository.save(oldTechnicianDTO);
+    }
+
+    public void delete(Long id) {
+
+        Technician technicianToBeDeleted = findById(id);
+        if (!technicianToBeDeleted.getRequests().isEmpty()) throw new BadRequestException("O técnico possui ordens de serviços em seu registro e" +
+                "não pode ser deletado no momento!");
+        technicianRepository.deleteById(id);
+
 
     }
 }

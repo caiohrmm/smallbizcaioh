@@ -48,6 +48,17 @@ public class TechnicianController {
         return ResponseEntity.created(uri).body(new TechnicianDTO(technician));
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<TechnicianDTO> update(@PathVariable Long id, @Valid @RequestBody TechnicianDTO technicianDTO) {
+        Technician newTechnician = this.technicianService.update(id, technicianDTO);
+        return ResponseEntity.ok().body(new TechnicianDTO(newTechnician));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<TechnicianDTO> delete(@PathVariable Long id) {
+        this.technicianService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }
