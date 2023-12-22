@@ -9,6 +9,7 @@ import com.caiohenrique.smallbizjava.repositories.TechnicianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,5 +28,9 @@ public class RequestService {
         return request.orElseThrow(() -> new ObjectNotFoundException("Chamado " +
                 "de id: "+id+ " não encontrado!"));
 
+    }
+
+    public List<Request> findAll() {
+        return requestRepository.findAll();
     }
 }
