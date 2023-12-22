@@ -8,7 +8,6 @@ import org.hibernate.validator.constraints.br.CPF;
 import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
@@ -100,6 +99,11 @@ public class ClientDTO implements Serializable {
 
     public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public ClientDTO() {
+        super();
+        addProfile(Profile.CLIENT);
     }
 
     @Override
