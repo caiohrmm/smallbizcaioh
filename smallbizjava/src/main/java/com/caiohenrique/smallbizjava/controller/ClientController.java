@@ -22,7 +22,7 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    // Método para buscar um técnico por ID
+    // Método para buscar um client por ID
     @GetMapping(value = "/{id}")
     public ResponseEntity<ClientDTO> findById(@PathVariable Long id) {
 

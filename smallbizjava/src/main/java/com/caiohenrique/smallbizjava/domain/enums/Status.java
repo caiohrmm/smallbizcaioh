@@ -2,17 +2,19 @@ package com.caiohenrique.smallbizjava.domain.enums;
 
 public enum Status {
 	
-	OPEN(0, "ROLE_OPEN"),
-    IN_PROGRESS(1, "ROLE_IN_PROGRESS"),
-    CLOSED(2, "ROLE_CLOSED");
+	OPEN(0, "ROLE_OPEN", "ABERTO"),
+    IN_PROGRESS(1, "ROLE_IN_PROGRESS", "EM ANDAMENTO"),
+    CLOSED(2, "ROLE_CLOSED", "FECHADO");
 	
 	private Integer id;
 	private String description;
+	private String name;
 	
 	
-	private Status(Integer id, String description) {
+	private Status(Integer id, String description, String name) {
 		this.id = id;
 		this.description = description;
+		this.name = name;
 	}
 
 
@@ -34,7 +36,15 @@ public enum Status {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public static Status toEnum(Integer id) {
 		
 		if (id == null) return null;

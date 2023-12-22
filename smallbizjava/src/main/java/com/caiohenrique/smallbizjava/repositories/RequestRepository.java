@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.caiohenrique.smallbizjava.domain.Request;
 
-public interface RequestRepository extends JpaRepository<Request, Integer> {
+public interface RequestRepository extends JpaRepository<Request, Long> {
 
 }
