@@ -2,6 +2,7 @@ package com.caiohenrique.smallbizjava.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.caiohenrique.smallbizjava.domain.dtos.RequestDTO;
 import com.caiohenrique.smallbizjava.domain.enums.Priority;
 import com.caiohenrique.smallbizjava.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -28,7 +30,7 @@ public class Request implements Serializable {
 
     @Column(name = "opening_date")
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate openingDate = LocalDate.now();
+    private LocalDateTime openingDate = LocalDateTime.now();
 
     @Column(name = "closing_date")
     @JsonFormat(pattern = "dd/MM/yyyy")
@@ -78,11 +80,11 @@ public class Request implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getOpeningDate() {
+    public LocalDateTime getOpeningDate() {
         return openingDate;
     }
 
-    public void setOpeningDate(LocalDate openingDate) {
+    public void setOpeningDate(LocalDateTime openingDate) {
         this.openingDate = openingDate;
     }
 
@@ -162,6 +164,4 @@ public class Request implements Serializable {
                 && status == other.status && Objects.equals(technician, other.technician)
                 && Objects.equals(title, other.title);
     }
-
-
 }
