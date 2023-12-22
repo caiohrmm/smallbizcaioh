@@ -46,9 +46,9 @@ public class RequestDTO implements Serializable {
         this.id = request.getId();
         this.openingDate = request.getOpeningDate();
         this.closingDate = request.getClosingDate();
-        this.priorityName = request.getPriority().name();
+        this.priorityName = request.getPriority().getName();
         this.priority = request.getPriority().getId();
-        this.statusName = request.getStatus().name();
+        this.statusName = request.getStatus().getName();
         this.status = request.getStatus().getId();
         this.title = request.getTitle();
         this.description = request.getDescription();
